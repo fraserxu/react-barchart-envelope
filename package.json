@@ -1,6 +1,6 @@
 {
   "name": "react-barchart-envelope",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "React component for simple barchart envelope",
   "main": "index.js",
   "repository": {
