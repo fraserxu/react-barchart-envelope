@@ -5,6 +5,10 @@ React component for simple barchart envelope
 
 ![react-barchart-envelope](https://cloud.githubusercontent.com/assets/1183541/5359251/d2e0c660-7ff6-11e4-8f24-f717d6bf6b6e.png)
 
+### Demo
+
+[http://fraserxu.me/react-barchart-envelope/](http://fraserxu.me/react-barchart-envelope/)
+
 ### Installation
 
 ```
