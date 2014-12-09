@@ -4,28 +4,11 @@ var BarchartEnvelope = require('../index')
 var Graph = React.createClass({
   render: function() {
 
-    // var data = {
-    //   labels: ['W1', 'W2', 'W3', 'W4', 'W5', 'W6', 'W7', 'W8', 'W9', 'W10'],
-    //   series: [
-    //     [1, 2, 4, 8, 6, -2, -1, -4, -6, -2]
-    //   ]
-    // };
-
-    // var options = {
-    //   high: 10,
-    //   low: -10,
-    //   axisX: {
-    //     labelInterpolationFnc: function(value, index) {
-    //       return index % 2 === 0 ? value : null;
-    //     }
-    //   }
-    // };
-
-    // var type = 'Bar'
+    var data = [15, 12, 25, 8, 20, 14, 15, 3, 9, 29, 23, 12, 10, 26, 17, 25, 4, 29, 23, 12, 10, 26, 17, 25, 4, 29, 23, 12, 10, 26, 17, 25]
 
     return (
       <div>
-        <BarchartEnvelope />
+        <BarchartEnvelope data={data} />
       </div>
     )
   }

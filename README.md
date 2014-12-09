@@ -3,6 +3,8 @@ react-barchart-envelope
 
 React component for simple barchart envelope
 
+!react-barchart-envelope](https://cloud.githubusercontent.com/assets/1183541/5359251/d2e0c660-7ff6-11e4-8f24-f717d6bf6b6e.png)
+
 ### Installation
 
 ```
@@ -12,24 +14,31 @@ $ npm install react-barchart-envelope --save
 ### Usage
 
 ```JavaScript
-var ChartistGraph = require('react-chartist')
+var React = require('react')
+var BarchartEnvelope = require('react-barchart-envelope')
 
-var Pie = React.createClass({
+var Graph = React.createClass({
   render: function() {
 
-    var type = 'Pie'
-    var data = {
-      series: [20, 10, 30, 40]
-    }
+    var data = [15, 12, 25, 8, 20, 14, 15, 3, 9, 29, 23, 12, 10, 26, 17, 25, 4, 29, 23, 12, 10, 26, 17, 25, 4, 29, 23, 12, 10, 26, 17, 25]
 
     return (
       <div>
-        <ChartistGraph data={data} type={type} />
+        <BarchartEnvelope data={data} />
       </div>
     )
   }
 })
+
+React.render(<Graph />, document.body)
 ```
+
+### Options
+
+* width
+* height
+* strokeColor
+* strokeWidth
 
 ### License
 
