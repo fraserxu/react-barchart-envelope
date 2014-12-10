@@ -6,11 +6,11 @@ var d3 = require('d3')
 var BarchartEnvelope = React.createClass({
   getDefaultProps: function() {
     return {
-      width: 500,
-      height: 100,
+      width: 100,
+      height: 16,
       strokeColor: 'black',
       strokeWidth: '0.5px',
-      data: [15, 12, 25, 8, 20, 14, 15, 3, 9, 29, 23, 12, 10, 26, 17, 25, 4, 29, 23, 12, 10, 26, 17, 25, 4, 29, 23, 12, 10, 26, 17, 25, 4, 29, 23, 12, 10, 26, 17, 25, 4, 29, 23, 12, 10, 26, 17, 25, 4, 29, 23, 12, 10, 26, 17, 25]
+      data: [15, 12, 25, 8, 20]
     }
   },
 
@@ -19,7 +19,7 @@ var BarchartEnvelope = React.createClass({
   },
 
   render: function() {
-    return <div></div>
+    return React.createElement('div', null)
   },
 
   renderBarchart: function() {
