@@ -6,8 +6,8 @@ var d3 = require('d3')
 var BarchartEnvelope = React.createClass({
   getDefaultProps: function() {
     return {
-      width: 100,
-      height: 16,
+      width: 700,
+      height: 200,
       strokeColor: 'black',
       strokeWidth: '0.5px',
       data: [15, 12, 25, 8, 20]
@@ -23,21 +23,21 @@ var BarchartEnvelope = React.createClass({
   },
 
   renderBarchart: function() {
+    var el = this.getDOMNode()
+    while (el.firstChild) {
+      el.removeChild(el.firstChild)
+    }
+
     var data = this.props.data.slice()
+    if (data.length === 0) return
 
-    var x = d3.scale.linear().range([2, this.props.width - 2])
-    var y = d3.scale.linear().range([this.props.height - 2, 2])
+    var xScale = d3.scale.linear()
+      .domain([0, data.length])
+      .range([2, this.props.width - 2])
 
-    x.domain([0, data.length])
-    y.domain(d3.extent(data))
-
-    var _line = 'M'
-    data.forEach(function(point, index) {
-      var _l = index === 0 ? '' : 'L'
-      var _point = _l + x(index).toString() + ',' + y(point).toString()
-      var _next = 'L' + x(index + 1).toString() + ',' + y(point).toString()
-      _line += (_point + _next)
-    })
+    var yScale = d3.scale.linear()
+      .domain(d3.extent(data))
+      .range([this.props.height - 2, 2])
 
     var svg = d3.select(this.getDOMNode())
       .append('svg')
@@ -45,13 +45,23 @@ var BarchartEnvelope = React.createClass({
       .attr('height', this.props.height)
       .append('g')
 
+    var line = d3.svg.line()
+      .interpolate('step-after')
+      .x(function(d, i) {
+        return xScale(i)
+      })
+      .y(function(d, i) {
+        return yScale(d)
+      })
+
     svg.append('path')
       .datum(data)
       .attr('class', 'envelope')
       .style('fill', 'none')
       .style('stroke', this.props.strokeColor)
       .style('stroke-width', this.props.strokeWidth)
-      .attr('d', _line)
+      .attr('d', line)
+
   }
 })
 
