@@ -26,9 +26,13 @@ var Graph = React.createClass({
 
     var data = [15, 12, 25, 8, 20, 14, 15, 3, 9, 29, 23, 12, 10, 26, 17, 25, 4, 29, 23, 12, 10, 26, 17, 25, 4, 29, 23, 12, 10, 26, 17, 25]
 
+    var onBarchartClick = function(d) {
+      console.log(d)
+    }
+
     return (
       <div>
-        <BarchartEnvelope data={data} />
+        <BarchartEnvelope data={data} onBarchartClick={onBarchartClick} hoverEffect={true}/>
       </div>
     )
   }
@@ -39,10 +43,12 @@ React.render(<Graph />, document.body)
 
 ### Options
 
-* width
-* height
-* strokeColor
-* strokeWidth
+* `onBarchartClick={onBarchartClick}` barchart click event listener
+* `hoverEffect={true}` set `true` to have hover effect on the chart
+* `width` set the width of the chart
+* `height` set the height of the chart
+* `strokeColor` set the color of the stroke
+* `strokeWidth` set the width of the stroke
 
 ### License
 

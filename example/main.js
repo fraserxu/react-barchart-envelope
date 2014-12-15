@@ -12,7 +12,7 @@ var Graph = React.createClass({
 
     return (
       <div>
-        <BarchartEnvelope data={data} onBarchartClick={onBarchartClick}/>
+        <BarchartEnvelope data={data} onBarchartClick={onBarchartClick} hoverEffect={true}/>
       </div>
     )
   }

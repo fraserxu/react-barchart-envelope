@@ -32,6 +32,7 @@ var BarchartEnvelope = React.createClass({
     var height = this.props.height
     var data = this.props.data.slice()
     var onBarchartClick = this.props.onBarchartClick || (function() {})
+    var hoverEffect = this.props.hoverEffect || false
     if (data.length === 0) return
 
     var xScale = d3.scale.linear()
@@ -69,7 +70,8 @@ var BarchartEnvelope = React.createClass({
       .style('stroke-width', this.props.strokeWidth)
       .attr('d', line)
 
-    svg.selectAll('rect')
+    if (hoverEffect) {
+      svg.selectAll('rect')
       .data(data)
       .enter()
       .append('rect')
@@ -85,7 +87,7 @@ var BarchartEnvelope = React.createClass({
       .attr('height', function(d) {
         return barchartScale(d)
       })
-      .attr('fill', '#fff')
+      .attr('fill', 'rgba(0, 0, 0, 0)')
       .style('cursor', 'pointer')
       .on('mouseover', function(d) {
         d3.select(this)
@@ -100,16 +102,16 @@ var BarchartEnvelope = React.createClass({
           .attr('y', yPosition)
           .attr('text-anchor', 'middle')
           .attr('font-family', 'sans-serif')
-          .attr('font-size', '11px')
+          .attr('font-size', '10px')
           .attr('font-weight', 'bold')
-          .attr('fill', 'black')
+          .attr('fill', '#fff')
           .text(d)
       })
       .on('mouseout', function() {
         d3.select(this)
           .transition()
           .duration(250)
-          .attr('fill', '#fff')
+          .attr('fill', 'rgba(0, 0, 0, 0)')
 
         d3.select('#tooltip').remove()
       })
@@ -120,6 +122,7 @@ var BarchartEnvelope = React.createClass({
       .text(function(d) {
         return d
       })
+    }
   }
 })
 
