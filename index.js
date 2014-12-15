@@ -28,21 +28,28 @@ var BarchartEnvelope = React.createClass({
       el.removeChild(el.firstChild)
     }
 
+    var width = this.props.width
+    var height = this.props.height
     var data = this.props.data.slice()
+    var onBarchartClick = this.props.onBarchartClick || (function() {})
     if (data.length === 0) return
 
     var xScale = d3.scale.linear()
       .domain([0, data.length])
-      .range([2, this.props.width - 2])
+      .range([2, width - 2])
 
     var yScale = d3.scale.linear()
       .domain(d3.extent(data))
-      .range([this.props.height - 2, 2])
+      .range([height - 2, 2])
+
+    var barchartScale = d3.scale.linear()
+      .domain(d3.extent(data))
+      .range([2, height - 2])
 
     var svg = d3.select(this.getDOMNode())
       .append('svg')
-      .attr('width', this.props.width)
-      .attr('height', this.props.height)
+      .attr('width', width)
+      .attr('height', height)
       .append('g')
 
     var line = d3.svg.line()
@@ -62,6 +69,57 @@ var BarchartEnvelope = React.createClass({
       .style('stroke-width', this.props.strokeWidth)
       .attr('d', line)
 
+    svg.selectAll('rect')
+      .data(data)
+      .enter()
+      .append('rect')
+      .attr('x', function(d, i) {
+        return xScale(i)
+      })
+      .attr('y', function(d) {
+        return height - barchartScale(d)
+      })
+      .attr('width', function() {
+        return width / data.length
+      })
+      .attr('height', function(d) {
+        return barchartScale(d)
+      })
+      .attr('fill', '#fff')
+      .style('cursor', 'pointer')
+      .on('mouseover', function(d) {
+        d3.select(this)
+          .attr('fill', 'orange')
+
+        var xPosition = parseFloat(d3.select(this).attr('x')) + width / data.length / 2
+        var yPosition = parseFloat(d3.select(this).attr('y')) + 14
+
+        svg.append('text')
+          .attr('id', 'tooltip')
+          .attr('x', xPosition)
+          .attr('y', yPosition)
+          .attr('text-anchor', 'middle')
+          .attr('font-family', 'sans-serif')
+          .attr('font-size', '11px')
+          .attr('font-weight', 'bold')
+          .attr('fill', 'black')
+          .text(d)
+      })
+      .on('mouseout', function() {
+        d3.select(this)
+          .transition()
+          .duration(250)
+          .attr('fill', '#fff')
+
+        d3.select('#tooltip').remove()
+      })
+      .on('click', function(d) {
+        onBarchartClick(d)
+      })
+      .append('title')
+      .text(function(d) {
+        return d
+      })
   }
 })
 
