@@ -45,6 +45,7 @@ React.render(<Graph />, document.body)
 
 * `onBarchartClick={onBarchartClick}` barchart click event listener
 * `hoverEffect={true}` set `true` to have hover effect on the chart
+* `tooltip={true}` set `true` to add tooltip to the chart
 * `width` set the width of the chart
 * `height` set the height of the chart
 * `strokeColor` set the color of the stroke
